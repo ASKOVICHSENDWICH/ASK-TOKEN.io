@@ -36,6 +36,8 @@ let score = 0;
 let tokens = 0; // Переменная для токенов
 let isPaused = true; // Переменная для контроля паузы
 
+let passedBuildings = 0; // Счетчик пройденных препятствий
+
 function drawHelicopter() {
     ctx.fillStyle = 'black';
     ctx.fillRect(helicopter.x, helicopter.y, helicopter.width, helicopter.height);
@@ -66,21 +68,29 @@ function updateHelicopter() {
 }
 
 function updateBuildings() {
-    if (frame % 150 === 0) {
+    if (frame % 80 === 0) { // Изменено значение с 150 на 100
         let topHeight = Math.random() * (canvas.height - buildingGap);
         let bottomHeight = canvas.height - topHeight - buildingGap;
         buildings.push({
             x: canvas.width,
             top: topHeight,
             bottom: bottomHeight,
-            passed: false // Добавлено для отслеживания пройденного здания
+            passed: false
         });
     }
+
     for (let i = buildings.length - 1; i >= 0; i--) {
-        buildings[i].x -= 2;
+        buildings[i].x -= 4;
         if (buildings[i].x + buildingWidth < 0) {
             buildings.splice(i, 1);
             score++;
+            passedBuildings++;
+            if (passedBuildings % 5 === 0) { // Проверяем каждое 5 пройденное препятствие
+                buildingGap -= 2; // Уменьшаем расстояние между препятствиями
+                buildings.forEach(building => {
+                    building.x -= 2; // Ускоряем препятствия
+                });
+            }
         }
         // Проверка, прошел ли вертолет между небоскребами
         if (!buildings[i].passed && buildings[i].x + buildingWidth < helicopter.x) {
@@ -107,6 +117,8 @@ function resetGame() {
     score = 0;
     tokens = 0; // Сброс токенов при перезапуске игры
     isPaused = true; // Пауза при перезапуске игры
+    passedBuildings = 0; // Сброс счетчика пройденных препятствий
+    buildingGap = 200; // Сброс расстояния между препятствиями
 }
 
 function draw() {
