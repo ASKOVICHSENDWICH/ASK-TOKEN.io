@@ -3,6 +3,21 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 600;
 
+canvas.addEventListener('mousedown', function(event) {
+    event.preventDefault(); // Предотвращаем действия по умолчанию, чтобы избежать выделения текста
+    if (!isPaused) {
+        helicopter.velocity = helicopter.lift;
+    }
+});
+
+canvas.addEventListener('touchstart', function(event) {
+    event.preventDefault(); // Предотвращаем действия по умолчанию, чтобы избежать скроллинга
+    if (!isPaused) {
+        helicopter.velocity = helicopter.lift;
+    }
+});
+
+
 let helicopter = {
     x: 50,
     y: 150,
