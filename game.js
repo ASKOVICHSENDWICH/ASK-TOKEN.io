@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = 320; // Уменьшен размер холста для мобильных устройств
+canvas.height = 480; // Уменьшен размер холста для мобильных устройств
 
 canvas.addEventListener('mousedown', function(event) {
     event.preventDefault(); // Предотвращаем действия по умолчанию, чтобы избежать выделения текста
