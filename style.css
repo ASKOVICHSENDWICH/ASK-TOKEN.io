@@ -25,3 +25,14 @@ canvas {
     font-size: 24px;
     color: #000;
 }
+
+
+#gameCanvas {
+    display: block;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
