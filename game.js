@@ -1,44 +1,46 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = 320; // Уменьшен размер холста для мобильных устройств
-canvas.height = 480; // Уменьшен размер холста для мобильных устройств
 
-// Остальной код игры остается таким же, но размеры объектов и расстояние между препятствиями могут быть уменьшены соответственно.
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // Initial resize to set canvas size
 
 canvas.addEventListener('mousedown', function(event) {
-    event.preventDefault(); // Предотвращаем действия по умолчанию, чтобы избежать выделения текста
+    event.preventDefault();
     if (!isPaused) {
         helicopter.velocity = helicopter.lift;
     }
 });
 
 canvas.addEventListener('touchstart', function(event) {
-    event.preventDefault(); // Предотвращаем действия по умолчанию, чтобы избежать скроллинга
+    event.preventDefault();
     if (!isPaused) {
         helicopter.velocity = helicopter.lift;
     }
 });
 
-
 let helicopter = {
     x: 50,
     y: 150,
-    width: 50,
-    height: 30,
-    gravity: 0.3, // Уменьшено значение гравитации
-    lift: -8,    // Уменьшено значение подъема
+    width: canvas.width * 0.1, // Adjusted relative to canvas width
+    height: canvas.height * 0.06, // Adjusted relative to canvas height
+    gravity: 0.3,
+    lift: -8,
     velocity: 0
 };
 
 let buildings = [];
-let buildingWidth = 60;
-let buildingGap = 200;
+let buildingWidth = canvas.width * 0.15; // Adjusted relative to canvas width
+let buildingGap = canvas.height * 0.3; // Adjusted relative to canvas height
 let frame = 0;
 let score = 0;
-let tokens = 0; // Переменная для токенов
-let isPaused = true; // Переменная для контроля паузы
-
-let passedBuildings = 0; // Счетчик пройденных препятствий
+let tokens = 0;
+let isPaused = true;
+let passedBuildings = 0;
 
 function drawHelicopter() {
     ctx.fillStyle = 'black';
@@ -57,7 +59,7 @@ function drawScore() {
 
 function drawTokens() {
     ctx.fillStyle = 'black';
-    ctx.font = '24px Arial';
+    ctx.font = `${canvas.height * 0.05}px Arial`; // Adjusted font size
     ctx.fillText(`Tokens: ${tokens}`, 10, 50);
 }
 
@@ -70,7 +72,7 @@ function updateHelicopter() {
 }
 
 function updateBuildings() {
-    if (frame % 80 === 0) { // Изменено значение с 150 на 100
+    if (frame % 80 === 0) {
         let topHeight = Math.random() * (canvas.height - buildingGap);
         let bottomHeight = canvas.height - topHeight - buildingGap;
         buildings.push({
@@ -87,17 +89,16 @@ function updateBuildings() {
             buildings.splice(i, 1);
             score++;
             passedBuildings++;
-            if (passedBuildings % 5 === 0) { // Проверяем каждое 5 пройденное препятствие
-                buildingGap -= 2; // Уменьшаем расстояние между препятствиями
+            if (passedBuildings % 5 === 0) {
+                buildingGap -= 2;
                 buildings.forEach(building => {
-                    building.x -= 2; // Ускоряем препятствия
+                    building.x -= 2;
                 });
             }
         }
-        // Проверка, прошел ли вертолет между небоскребами
         if (!buildings[i].passed && buildings[i].x + buildingWidth < helicopter.x) {
             buildings[i].passed = true;
-            tokens++; // Начисление токенов
+            tokens++;
         }
     }
 }
@@ -117,10 +118,10 @@ function resetGame() {
     helicopter.velocity = 0;
     buildings = [];
     score = 0;
-    tokens = 0; // Сброс токенов при перезапуске игры
-    isPaused = true; // Пауза при перезапуске игры
-    passedBuildings = 0; // Сброс счетчика пройденных препятствий
-    buildingGap = 200; // Сброс расстояния между препятствиями
+    tokens = 0;
+    isPaused = true;
+    passedBuildings = 0;
+    buildingGap = canvas.height * 0.3; // Reset building gap relative to canvas height
 }
 
 function draw() {
@@ -128,7 +129,7 @@ function draw() {
     drawHelicopter();
     buildings.forEach(drawBuilding);
     drawScore();
-    drawTokens(); // Отображение токенов
+    drawTokens();
 }
 
 function update() {
