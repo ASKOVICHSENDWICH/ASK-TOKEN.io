@@ -29,7 +29,7 @@ let helicopter = {
     width: canvas.width * 0.1, // Adjusted relative to canvas width
     height: canvas.height * 0.06, // Adjusted relative to canvas height
     gravity: 0.3,
-    lift: -8 \ 1.5,
+    lift: -8 / 1.5, // Уменьшено значение подъема в 1.5 раза
     velocity: 0
 };
 
@@ -121,7 +121,7 @@ function resetGame() {
     tokens = 0;
     isPaused = true;
     passedBuildings = 0;
-    buildingGap = canvas.height * 0.3; // Reset building gap relative to canvas height
+    buildingGap = canvas.height * 0.3;
 }
 
 function draw() {
