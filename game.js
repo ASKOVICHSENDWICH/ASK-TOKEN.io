@@ -28,8 +28,8 @@ let helicopter = {
     y: 150,
     width: canvas.width * 0.1, // Adjusted relative to canvas width
     height: canvas.height * 0.06, // Adjusted relative to canvas height
-    gravity: 0.5,
-    lift: -6,
+    gravity: 0.4,
+    lift: -8,
     velocity: 0
 };
 
