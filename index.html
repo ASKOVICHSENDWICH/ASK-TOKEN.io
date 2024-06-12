@@ -1,43 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helicopter Game</title>
-    <style>
-        canvas {
-            display: block;
-            margin: 0 auto;
-            background: lightblue;
-        }
-        #controls {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .corner-button {
-            position: absolute;
-            bottom: 10px;
-            padding: 10px 20px;
-            background-color: lightgray;
-            border: none;
-            cursor: pointer;
-        }
-        #settings-button {
-            left: 10px;
-        }
-        #missions-button {
-            right: 10px;
-        }
-    </style>
+    <title>Игра-кликер</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
     <div id="controls">
-        <button id="playButton">Играть</button>
-        <span id="score">0</span>
+        <button id="farmButton" class="button">ФАРМИТЬ</button>
+        <button id="collectButton" class="button" disabled>СОБРАТЬ</button>
     </div>
-    <button id="settings-button" class="corner-button">Настройки</button>
-    <button id="missions-button" class="corner-button">Задания</button>
+    <div class="counter">
+        Основной счет: <span id="mainScore">0</span>
+    </div>
+    <div class="counter">
+        Заработок: <span id="earningScore">0</span>
+    </div>
 
     <script src="game.js"></script>
 </body>
