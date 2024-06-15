@@ -7,15 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="controls">
-        <button id="farmButton" class="button">ФАРМИТЬ</button>
-        <button id="collectButton" class="button" disabled>СОБРАТЬ</button>
+    <div class="top">
+        <div class="counter big-font">
+            Основной счет: <span id="mainScore">0</span>
+        </div>
+        <div class="counter small-font">
+            Заработок: <span id="earningScore">0</span>
+        </div>
     </div>
-    <div class="counter">
-        Основной счет: <span id="mainScore">0</span>
+
+    <div id="content" class="content">
+        <div id="mainContent" class="content-pane">
+            <div id="controls">
+                <button id="farmButton" class="glow-on-hover" type="button">ФАРМИТЬ</button>
+                <button id="collectButton" class="glow-on-hover" disabled>СОБРАТЬ</button>
+            </div>
+        </div>
+        <div id="tasksContent" class="content-pane" style="display: none;">
+            <button id="checkButton" class="button">Проверить</button>
+        </div>
+        <div id="referralContent" class="content-pane" style="display: none;">
+            Скоро...
+        </div>
     </div>
-    <div class="counter">
-        Заработок: <span id="earningScore">0</span>
+
+    <div class="tabs">
+        <div class="tab" id="mainTab">MAIN</div>
+        <div class="tab" id="tasksTab">TASKS</div>
+        <div class="tab" id="referralTab">REFFERAL</div>
     </div>
 
     <script src="game.js"></script>
