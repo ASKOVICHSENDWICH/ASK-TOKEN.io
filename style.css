@@ -2,21 +2,46 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: Fantasy, sans-serif;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100%;
-    background-color: #87CEEB; /* Sky blue */
-    font-family: Arial, sans-serif;
+    background: url('C:/Test/webgame/images/photo_5426985358442226011_y.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
-#controls {
+.top {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+    z-index: 10;
+}
+
+.counter {
+    position: relative;
+    font-size: 36px;
+    color: black;
+    margin-bottom: -1px;
+    padding: 10px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #4B0082, #800080); /* Темно-фиолетовый градиент */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+.big-font {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.small-font {
+    font-size: 24px;
 }
 
 .button {
+    background: rgb(145,0,255);
+    background: linear-gradient(90deg, rgba(145,0,255,1) 0%, rgba(0,255,115,1) 100%);
     margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -25,32 +50,182 @@ body, html {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
 }
 
 .button:disabled {
-    background-color: #cccccc; /* Серый цвет для неактивной кнопки */
+    background-color: #cccccc;
     cursor: not-allowed;
 }
 
 .button:active:not(:disabled) {
-    background-color: #a9a9a9; /* Темный цвет при нажатии */
+    background-color: #a9a9a9;
 }
 
-.counter {
-    font-size: 24px;
-    color: black;
-    margin-top: 20px;
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 10px;
+    z-index: 10;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.tab {
+    flex-grow: 1;
+    padding: 10px 20px;
+    font-size: 16px;
     text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-right: 1px solid #add8e6;
 }
 
-@media (max-width: 600px) {
-    .button {
-        font-size: 14px;
-        padding: 10px;
-        width: 80%;
-    }
+.tab:last-child {
+    border-right: none;
+}
 
-    .counter {
-        font-size: 20px;
-    }
+.tab:hover {
+    background-color: #add8e6;
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin-top: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.content-pane {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+
+#tasksContent, #mainContent, #referralContent {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4B0082, #800080); /* Темно-фиолетовый градиент */
+}
+
+#tasksContent::before, #mainContent::before, #referralContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(22px);
+    z-index: -1;
+}
+
+#tasksContent {
+    background-image: url('C:/Test/webgame/images/tasks-bg.jpg');
+}
+
+#tasksContent::before {
+    background-image: url('C:/Test/webgame/images/tasks-bg.jpg');
+}
+
+#mainContent {
+    background-image: url('C:/Test/webgame/images/photo_5426985358442226011_y.jpg');
+}
+
+#mainContent::before {
+    background-image: url('C:/Test/webgame/images/photo_5426985358442226011_y.jpg');
+}
+
+#referralContent {
+    background-image: url('C:/Test/webgame/images/referral-bg.jpg');
+}
+
+#referralContent::before {
+    background-image: url('C:/Test/webgame/images/referral-bg.jpg');
+}
+
+#controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
 }
