@@ -199,27 +199,27 @@ body, html {
 }
 
 #tasksContent {
-    background-image: url('https://your-username.github.io/your-repository/images/tasks-bg.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/tasks-bg.jpg');
 }
 
 #tasksContent::before {
-    background-image: url('https://your-username.github.io/your-repository/images/tasks-bg.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/tasks-bg.jpg');
 }
 
 #mainContent {
-    background-image: url('https://your-username.github.io/your-repository/images/photo_5426985358442226011_y.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_5426985358442226011_y.jpg');
 }
 
 #mainContent::before {
-    background-image: url('https://your-username.github.io/your-repository/images/photo_5426985358442226011_y.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_5426985358442226011_y.jpg');
 }
 
 #referralContent {
-    background-image: url('https://your-username.github.io/your-repository/images/referral-bg.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/referral-bg.jpg');
 }
 
 #referralContent::before {
-    background-image: url('https://your-username.github.io/your-repository/images/referral-bg.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/referral-bg.jpg');
 }
 
 #controls {
