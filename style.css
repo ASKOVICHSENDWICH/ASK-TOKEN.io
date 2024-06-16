@@ -8,8 +8,8 @@ body, html {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
-    background-size: cover;
+    background-color: black; /* Черный фон */
+    color: white;
 }
 
 .top {
@@ -21,7 +21,7 @@ body, html {
 .counter {
     position: relative;
     font-size: 36px;
-    color: black;
+    color: white; /* Изменен цвет текста на белый для контраста с черным фоном */
     margin-bottom: -1px;
     padding: 10px;
     border-radius: 11px;
@@ -73,7 +73,7 @@ body, html {
     padding: 10px 20px;
     font-size: 16px;
     background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(64, 64, 64, 1) 100%);
-    color: white;
+    color: white; /* Изменен цвет текста на белый для контраста с черным фоном */
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -156,7 +156,8 @@ body, html {
 #tasksContent, #mainContent, #referralContent {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #4B0082, #800080);
+    background: linear-gradient(135deg, #4B0082, #800080); /* Темно-фиолетовый градиент */
+    background-image: url('images/photo_6011359021052834986_y.png'); /* Единое фото для всех фонов */
 }
 
 #tasksContent::before, #mainContent::before, #referralContent::before {
@@ -168,32 +169,9 @@ body, html {
     height: 100%;
     background-size: cover;
     background-position: center;
-    filter: blur(3px);
+    background-image: url('images/photo_6011359021052834986_y.png'); /* Единое фото для всех фонов */
+    filter: blur(3px); /* Уменьшено размытие до 3 */
     z-index: -1;
-}
-
-#tasksContent {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
-}
-
-#tasksContent::before {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
-}
-
-#mainContent {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
-}
-
-#mainContent::before {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
-}
-
-#referralContent {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
-}
-
-#referralContent::before {
-    background-image: url('https://github.com/ASKOVICHSENDWICH/ASK-TOKEN.io/raw/C:/Test/webgame/images/photo_6011359021052834986_y.png');
 }
 
 #controls {
