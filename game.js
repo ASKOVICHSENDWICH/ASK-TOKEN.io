@@ -1,79 +1,69 @@
-document.getElementById('tasksTab').addEventListener('click', function() {
-    document.getElementById('mainContent').style.display = 'none';
-    document.getElementById('tasksContent').style.display = 'block';
-    document.getElementById('referralContent').style.display = 'none';
-});
-
-document.getElementById('mainTab').addEventListener('click', function() {
-    document.getElementById('mainContent').style.display = 'block';
-    document.getElementById('tasksContent').style.display = 'none';
-    document.getElementById('referralContent').style.display = 'none';
-});
-
-document.getElementById('referralTab').addEventListener('click', function() {
-    document.getElementById('mainContent').style.display = 'none';
-    document.getElementById('tasksContent').style.display = 'none';
-    document.getElementById('referralContent').style.display = 'block';
-});
-
-let mainScore = 0;
-let earningScore = 0;
-let isFarming = false;
-let farmingInterval;
-const earningsPerSecond = 2; // Количество очков в секунду
-const maxEarningScore = 60; // Максимальное количество очков заработка
-const updateInterval = 1000; // 1 секунда
-
-function updateMainScore() {
-    document.getElementById('mainScore').innerText = mainScore;
-}
-
-function updateEarningScore() {
-    document.getElementById('earningScore').innerText = earningScore;
-}
-
-function checkCollectButton() {
+document.addEventListener('DOMContentLoaded', () => {
+    const mainScore = document.getElementById('mainScore');
+    const earningScore = document.getElementById('earningScore');
+    const farmButton = document.getElementById('farmButton');
     const collectButton = document.getElementById('collectButton');
-    if (earningScore >= maxEarningScore) {
-        collectButton.disabled = false;
-    } else {
-        collectButton.disabled = true;
-    }
-}
+    const circle = document.getElementById('circle');
 
-document.getElementById('farmButton').addEventListener('click', function() {
-    if (!isFarming) {
+    let mainCount = 0;
+    let earningCount = 0;
+    let isFarming = false;
+    let earningProgress = 0;
+
+    farmButton.addEventListener('click', () => {
         isFarming = true;
-        this.disabled = true; // Делаем кнопку "ФАРМИТЬ" неактивной
-        farmingInterval = setInterval(() => {
-            if (earningScore < maxEarningScore) {
-                earningScore += earningsPerSecond;
-                if (earningScore > maxEarningScore) {
-                    earningScore = maxEarningScore;
-                }
-                updateEarningScore();
-                checkCollectButton();
+        farmButton.disabled = true;
+        collectButton.disabled = false;
+
+        const farmInterval = setInterval(() => {
+            if (isFarming) {
+                earningCount += 10; // Увеличить заработок на 10 каждую секунду
+                earningProgress = (earningCount / 1000) * 100; // Обновить прогресс индикатора (1000 - максимальное значение)
+                if (earningProgress > 100) earningProgress = 100; // Ограничить значение до 100%
+                earningScore.textContent = earningCount;
+                circle.style.strokeDasharray = `${earningProgress}, 100`;
             } else {
-                clearInterval(farmingInterval); // Останавливаем фарминг, когда достигнуто 60 очков
+                clearInterval(farmInterval);
             }
-        }, updateInterval);
-    }
-});
+        }, 1000);
+    });
 
-document.getElementById('collectButton').addEventListener('click', function() {
-    if (earningScore >= maxEarningScore) {
-        mainScore += earningScore;
-        earningScore = 0;
-        updateMainScore();
-        updateEarningScore();
-        document.getElementById('farmButton').disabled = false; // Делаем кнопку "ФАРМИТЬ" активной
-        this.disabled = true; // Делаем кнопку "СОБРАТЬ" неактивной
-        isFarming = false; // Сбрасываем состояние фарминга
-        clearInterval(farmingInterval); // Останавливаем текущий интервал фарминга
-    }
-});
+    collectButton.addEventListener('click', () => {
+        if (isFarming) {
+            mainCount += earningCount;
+            mainScore.textContent = mainCount;
+            earningCount = 0;
+            earningScore.textContent = earningCount;
+            earningProgress = 0;
+            circle.style.strokeDasharray = `${earningProgress}, 100`;
+            isFarming = false;
+            farmButton.disabled = false;
+            collectButton.disabled = true;
+        }
+    });
 
-// Обновляем счетчики при загрузке страницы
-updateMainScore();
-updateEarningScore();
-checkCollectButton();
+    const mainTab = document.getElementById('mainTab');
+    const tasksTab = document.getElementById('tasksTab');
+    const referralTab = document.getElementById('referralTab');
+    const mainContent = document.getElementById('mainContent');
+    const tasksContent = document.getElementById('tasksContent');
+    const referralContent = document.getElementById('referralContent');
+
+    mainTab.addEventListener('click', () => {
+        mainContent.style.display = 'flex';
+        tasksContent.style.display = 'none';
+        referralContent.style.display = 'none';
+    });
+
+    tasksTab.addEventListener('click', () => {
+        mainContent.style.display = 'none';
+        tasksContent.style.display = 'flex';
+        referralContent.style.display = 'none';
+    });
+
+    referralTab.addEventListener('click', () => {
+        mainContent.style.display = 'none';
+        tasksContent.style.display = 'none';
+        referralContent.style.display = 'flex';
+    });
+});
