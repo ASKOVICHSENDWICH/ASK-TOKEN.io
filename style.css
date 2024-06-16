@@ -8,8 +8,9 @@ body, html {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: url('C:/Test/webgame/images/photo_5426985358442226011_y.jpg') no-repeat center center fixed;
+    background: url('C:/Test/webgame/images/photo_6011359021052834986_y.png') no-repeat center center fixed;
     background-size: cover;
+    background-color: black;
 }
 
 .top {
@@ -207,11 +208,11 @@ body, html {
 }
 
 #mainContent {
-    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_5426985358442226011_y.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_6011359021052834986_y.png');
 }
 
 #mainContent::before {
-    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_5426985358442226011_y.jpg');
+    background-image: url('https://askovichsendwich.github.io/ASK-TOKEN.io/images/photo_6011359021052834986_y.png');
 }
 
 #referralContent {
