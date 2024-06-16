@@ -14,13 +14,26 @@
         <div class="counter small-font">
             Заработок: <span id="earningScore">0</span>
         </div>
+        <div id="circleProgress">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg"
+                      d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831
+                         a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path id="circle" class="circle"
+                      stroke-dasharray="0, 100"
+                      d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831
+                         a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+        </div>
     </div>
 
     <div id="content" class="content">
         <div id="mainContent" class="content-pane">
             <div id="controls">
-                <button id="farmButton" class="glow-on-hover" type="button">ФАРМИТЬ</button>
-                <button id="collectButton" class="glow-on-hover" disabled>СОБРАТЬ</button>
+                <button id="farmButton" class="button">ФАРМИТЬ</button>
+                <button id="collectButton" class="button" disabled>СОБРАТЬ</button>
             </div>
         </div>
         <div id="tasksContent" class="content-pane" style="display: none;">
@@ -34,7 +47,7 @@
     <div class="tabs">
         <div class="tab" id="mainTab">MAIN</div>
         <div class="tab" id="tasksTab">TASKS</div>
-        <div class="tab" id="referralTab">REFFERAL</div>
+        <div class="tab" id="referralTab">REFERRAL</div>
     </div>
 
     <script src="game.js"></script>
