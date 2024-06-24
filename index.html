@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="blurBackground"></div> <!-- Добавлено для размытия фона -->
     <div class="top">
         <div class="counter big-font">
             Основной счет: <span id="mainScore">0</span>
@@ -42,12 +43,18 @@
         <div id="referralContent" class="content-pane" style="display: none;">
             Скоро...
         </div>
+        <div id="settingsContent" class="content-pane" style="display: none;">
+            <label for="opacityRange">Прозрачность фона:</label>
+            <input type="range" id="opacityRange" min="0" max="10" value="0">
+            <button id="aboutButton" class="button">О нас</button>
+        </div>
     </div>
 
     <div class="tabs">
         <div class="tab" id="mainTab">MAIN</div>
         <div class="tab" id="tasksTab">TASKS</div>
         <div class="tab" id="referralTab">REFERRAL</div>
+        <div class="tab" id="settingsTab">SETTINGS</div>
     </div>
 
     <script src="game.js"></script>
