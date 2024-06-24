@@ -1,69 +1,102 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const mainScore = document.getElementById('mainScore');
-    const earningScore = document.getElementById('earningScore');
-    const farmButton = document.getElementById('farmButton');
-    const collectButton = document.getElementById('collectButton');
-    const circle = document.getElementById('circle');
-
-    let mainCount = 0;
-    let earningCount = 0;
-    let isFarming = false;
-    let earningProgress = 0;
-
-    farmButton.addEventListener('click', () => {
-        isFarming = true;
-        farmButton.disabled = true;
-        collectButton.disabled = false;
-
-        const farmInterval = setInterval(() => {
-            if (isFarming) {
-                earningCount += 10; // Увеличить заработок на 10 каждую секунду
-                earningProgress = (earningCount / 1000) * 100; // Обновить прогресс индикатора (1000 - максимальное значение)
-                if (earningProgress > 100) earningProgress = 100; // Ограничить значение до 100%
-                earningScore.textContent = earningCount;
-                circle.style.strokeDasharray = `${earningProgress}, 100`;
-            } else {
-                clearInterval(farmInterval);
-            }
-        }, 1000);
-    });
-
-    collectButton.addEventListener('click', () => {
-        if (isFarming) {
-            mainCount += earningCount;
-            mainScore.textContent = mainCount;
-            earningCount = 0;
-            earningScore.textContent = earningCount;
-            earningProgress = 0;
-            circle.style.strokeDasharray = `${earningProgress}, 100`;
-            isFarming = false;
-            farmButton.disabled = false;
-            collectButton.disabled = true;
-        }
-    });
-
-    const mainTab = document.getElementById('mainTab');
-    const tasksTab = document.getElementById('tasksTab');
-    const referralTab = document.getElementById('referralTab');
-    const mainContent = document.getElementById('mainContent');
-    const tasksContent = document.getElementById('tasksContent');
-    const referralContent = document.getElementById('referralContent');
-
-    mainTab.addEventListener('click', () => {
-        mainContent.style.display = 'flex';
-        tasksContent.style.display = 'none';
-        referralContent.style.display = 'none';
-    });
-
-    tasksTab.addEventListener('click', () => {
-        mainContent.style.display = 'none';
-        tasksContent.style.display = 'flex';
-        referralContent.style.display = 'none';
-    });
-
-    referralTab.addEventListener('click', () => {
-        mainContent.style.display = 'none';
-        tasksContent.style.display = 'none';
-        referralContent.style.display = 'flex';
-    });
+document.getElementById('tasksTab').addEventListener('click', function() {
+    switchContent('tasksContent');
 });
+
+document.getElementById('mainTab').addEventListener('click', function() {
+    switchContent('mainContent');
+});
+
+document.getElementById('referralTab').addEventListener('click', function() {
+    switchContent('referralContent');
+});
+
+document.getElementById('settingsTab').addEventListener('click', function() {
+    switchContent('settingsContent');
+});
+
+document.getElementById('aboutButton').addEventListener('click', function() {
+    window.open('https://instagram.com/zaur.kam', '_blank');
+});
+
+document.getElementById('opacityRange').addEventListener('input', function() {
+    const blurValue = this.value;
+    const blurBackground = document.getElementById('blurBackground');
+    if (blurBackground) {
+        blurBackground.style.filter = `blur(${blurValue}px)`;
+    } else {
+        console.error('Element with id "blurBackground" not found.');
+    }
+});
+
+let mainScore = 0;
+let earningScore = 0;
+let isFarming = false;
+let farmingInterval;
+
+const earningsPerSecond = 100;
+const maxEarningScore = 1000;
+const updateInterval = 1000;
+
+function updateMainScore() {
+    document.getElementById('mainScore').innerText = mainScore;
+}
+
+function updateEarningScore() {
+    document.getElementById('earningScore').innerText = earningScore;
+}
+
+function updateProgressBar() {
+    const progress = (earningScore / maxEarningScore) * 100;
+    document.getElementById('circle').style.strokeDasharray = `${progress}, 100`;
+}
+
+function checkCollectButton() {
+    const collectButton = document.getElementById('collectButton');
+    collectButton.disabled = earningScore < maxEarningScore;
+}
+
+document.getElementById('farmButton').addEventListener('click', function() {
+    if (!isFarming) {
+        isFarming = true;
+        this.disabled = true;
+        farmingInterval = setInterval(() => {
+            if (earningScore < maxEarningScore) {
+                earningScore += earningsPerSecond;
+                if (earningScore > maxEarningScore) {
+                    earningScore = maxEarningScore;
+                }
+                updateEarningScore();
+                updateProgressBar();
+                checkCollectButton();
+            } else {
+                clearInterval(farmingInterval);
+            }
+        }, updateInterval);
+    }
+});
+
+document.getElementById('collectButton').addEventListener('click', function() {
+    if (earningScore >= maxEarningScore) {
+        mainScore += earningScore;
+        earningScore = 0;
+        updateMainScore();
+        updateEarningScore();
+        updateProgressBar();
+        document.getElementById('farmButton').disabled = false;
+        this.disabled = true;
+        isFarming = false;
+        clearInterval(farmingInterval);
+    }
+});
+
+function switchContent(contentId) {
+    const contents = document.querySelectorAll('.content-pane');
+    contents.forEach(content => {
+        content.style.display = content.id === contentId ? 'block' : 'none';
+    });
+}
+
+updateMainScore();
+updateEarningScore();
+updateProgressBar();
+checkCollectButton();
