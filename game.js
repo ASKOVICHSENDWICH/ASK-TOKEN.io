@@ -1,102 +1,53 @@
-document.getElementById('tasksTab').addEventListener('click', function() {
-    switchContent('tasksContent');
-});
+// Функция для обработки завершения просмотра рекламы и начисления токенов
+function handleAdEnded() {
+    mainScore += 10; // Например, 10 токенов за просмотр
+    updateMainScore();
+    document.getElementById('adVideo').style.display = 'none';
+}
 
-document.getElementById('mainTab').addEventListener('click', function() {
-    switchContent('mainContent');
-});
-
-document.getElementById('referralTab').addEventListener('click', function() {
-    switchContent('referralContent');
-});
-
-document.getElementById('settingsTab').addEventListener('click', function() {
-    switchContent('settingsContent');
-});
-
-document.getElementById('aboutButton').addEventListener('click', function() {
-    window.open('https://instagram.com/zaur.kam', '_blank');
-});
-
-document.getElementById('opacityRange').addEventListener('input', function() {
-    const blurValue = this.value;
-    const blurBackground = document.getElementById('blurBackground');
-    if (blurBackground) {
-        blurBackground.style.filter = `blur(${blurValue}px)`;
-    } else {
-        console.error('Element with id "blurBackground" not found.');
-    }
-});
-
-let mainScore = 0;
-let earningScore = 0;
-let isFarming = false;
-let farmingInterval;
-
-const earningsPerSecond = 100;
-const maxEarningScore = 1000;
-const updateInterval = 1000;
-
+// Функция для обновления основного счета
 function updateMainScore() {
-    document.getElementById('mainScore').innerText = mainScore;
+    // Логика для обновления счета на интерфейсе
+    console.log("Main score updated: " + mainScore);
 }
 
-function updateEarningScore() {
-    document.getElementById('earningScore').innerText = earningScore;
-}
+// Инициализация основного счета
+let mainScore = 0;
 
-function updateProgressBar() {
-    const progress = (earningScore / maxEarningScore) * 100;
-    document.getElementById('circle').style.strokeDasharray = `${progress}, 100`;
-}
+// Добавление обработчика события для кнопки "Смотреть рекламу"
+document.getElementById('watchAdButton').addEventListener('click', function() {
+    const adVideo = document.getElementById('adVideo');
+    adVideo.style.display = 'block';
+    adVideo.play();
 
-function checkCollectButton() {
-    const collectButton = document.getElementById('collectButton');
-    collectButton.disabled = earningScore < maxEarningScore;
-}
-
-document.getElementById('farmButton').addEventListener('click', function() {
-    if (!isFarming) {
-        isFarming = true;
-        this.disabled = true;
-        farmingInterval = setInterval(() => {
-            if (earningScore < maxEarningScore) {
-                earningScore += earningsPerSecond;
-                if (earningScore > maxEarningScore) {
-                    earningScore = maxEarningScore;
-                }
-                updateEarningScore();
-                updateProgressBar();
-                checkCollectButton();
-            } else {
-                clearInterval(farmingInterval);
-            }
-        }, updateInterval);
-    }
+    adVideo.addEventListener('ended', handleAdEnded);
 });
 
-document.getElementById('collectButton').addEventListener('click', function() {
-    if (earningScore >= maxEarningScore) {
-        mainScore += earningScore;
-        earningScore = 0;
-        updateMainScore();
-        updateEarningScore();
-        updateProgressBar();
-        document.getElementById('farmButton').disabled = false;
-        this.disabled = true;
-        isFarming = false;
-        clearInterval(farmingInterval);
-    }
+// Обработчики вкладок
+document.getElementById('earnTab').addEventListener('click', function() {
+    setActiveTab('earnTab', 'adsContent');
 });
 
-function switchContent(contentId) {
-    const contents = document.querySelectorAll('.content-pane');
-    contents.forEach(content => {
-        content.style.display = content.id === contentId ? 'block' : 'none';
+document.getElementById('tasksTab').addEventListener('click', function() {
+    setActiveTab('tasksTab', 'tasksContent');
+});
+
+document.getElementById('walletTab').addEventListener('click', function() {
+    setActiveTab('walletTab', 'walletContent');
+});
+
+// Функция для установки активной вкладки
+function setActiveTab(activeTabId, contentId) {
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
     });
+    document.getElementById(activeTabId).classList.add('active');
+
+    document.querySelectorAll('.content-pane').forEach(content => {
+        content.style.display = 'none';
+    });
+    document.getElementById(contentId).style.display = 'block';
 }
 
-updateMainScore();
-updateEarningScore();
-updateProgressBar();
-checkCollectButton();
+// Установка начальной вкладки как активной
+setActiveTab('earnTab', 'adsContent');
