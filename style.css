@@ -64,3 +64,12 @@ body, html {
     box-sizing: border-box;
     display: none;
 }
+
+/* Стили для счетчика токенов */
+.counter {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #00ff00; /* Ярко-зеленый цвет */
+}
