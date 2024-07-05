@@ -1,60 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игра-кликер</title>
     <link rel="stylesheet" href="style.css">
+    <title>Рекламная Игра</title>
 </head>
 <body>
-    <div id="blurBackground"></div> <!-- Добавлено для размытия фона -->
-    <div class="top">
-        <div class="counter big-font">
-            Основной счет: <span id="mainScore">0</span>
-        </div>
-        <div class="counter small-font">
-            Заработок: <span id="earningScore">0</span>
-        </div>
-        <div id="circleProgress">
-            <svg viewBox="0 0 36 36" class="circular-chart">
-                <path class="circle-bg"
-                      d="M18 2.0845
-                         a 15.9155 15.9155 0 0 1 0 31.831
-                         a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                <path id="circle" class="circle"
-                      stroke-dasharray="0, 100"
-                      d="M18 2.0845
-                         a 15.9155 15.9155 0 0 1 0 31.831
-                         a 15.9155 15.9155 0 0 1 0 -31.831"/>
-            </svg>
-        </div>
+    <!-- Контент вкладок -->
+    <div id="adsContent" class="content-pane" style="display: block;">
+        <button id="watchAdButton" class="button">Смотреть рекламу</button>
+        <video id="adVideo" width="320" height="240" controls style="display: none;">
+            <source src="path_to_ad_video.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+    <div id="tasksContent" class="content-pane" style="display: none;">
+        <!-- Контент для ежедневных заданий -->
+        <h2>Tasks</h2>
+        <p>Здесь будут отображаться ежедневные задания.</p>
+    </div>
+    <div id="walletContent" class="content-pane" style="display: none;">
+        <!-- Контент для подключения кошелька -->
+        <h2>Wallet</h2>
+        <p>Здесь будет информация о подключении кошелька.</p>
     </div>
 
-    <div id="content" class="content">
-        <div id="mainContent" class="content-pane">
-            <div id="controls">
-                <button id="farmButton" class="button">ФАРМИТЬ</button>
-                <button id="collectButton" class="button" disabled>СОБРАТЬ</button>
-            </div>
-        </div>
-        <div id="tasksContent" class="content-pane" style="display: none;">
-            <button id="checkButton" class="button">Проверить</button>
-        </div>
-        <div id="referralContent" class="content-pane" style="display: none;">
-            Скоро...
-        </div>
-        <div id="settingsContent" class="content-pane" style="display: none;">
-            <label for="opacityRange">Прозрачность фона:</label>
-            <input type="range" id="opacityRange" min="0" max="10" value="0">
-            <button id="aboutButton" class="button">О нас</button>
-        </div>
-    </div>
-
-    <div class="tabs">
-        <div class="tab" id="mainTab">MAIN</div>
-        <div class="tab" id="tasksTab">TASKS</div>
-        <div class="tab" id="referralTab">REFERRAL</div>
-        <div class="tab" id="settingsTab">SETTINGS</div>
+    <!-- Вкладки -->
+    <div class="tab-bar">
+        <button class="tab" id="earnTab">Earn</button>
+        <button class="tab" id="tasksTab">Tasks</button>
+        <button class="tab" id="walletTab">Wallet</button>
     </div>
 
     <script src="game.js"></script>
