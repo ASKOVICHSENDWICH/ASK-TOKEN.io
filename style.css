@@ -1,178 +1,66 @@
+/* Темный фон для страницы */
 body, html {
+    background-color: #121212; /* Темно-серый/черный цвет */
+    color: #ffffff; /* Белый текст */
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    font-family: Fantasy, sans-serif;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: black;
-    color: white;
+    font-family: Arial, sans-serif;
 }
 
-.top {
-    text-align: center;
-    margin-top: 20px;
-    z-index: 10;
-}
-
-.counter {
-    position: relative;
-    font-size: 36px;
-    color: white;
-    margin-bottom: -1px;
-    padding: 10px;
-    border-radius: 11px;
-    background: -webkit-linear-gradient(0deg, rgb(0, 1, 15), rgb(64, 0, 101));
-    background: -moz-linear-gradient(0deg, rgb(0, 1, 15), rgb(64, 0, 101));
-    background: linear-gradient(0deg, rgb(0, 1, 15), rgb(64, 0, 101));
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 20;
-}
-
-#circleProgress {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-}
-
-.circular-chart {
-    display: block;
-    max-width: 100%;
-    max-height: 250px;
-}
-
-.circle-bg {
-    fill: none;
-    stroke: #eee;
-    stroke-width: 3.8;
-}
-
-.circle {
-    fill: none;
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    stroke: #00aaff;
-    transition: stroke-dasharray 0.6s ease 0s;
-}
-
-.big-font {
-    font-size: 48px;
-    font-weight: bold;
-}
-
-.small-font {
-    font-size: 24px;
-}
-
+/* Стили для кнопок */
 .button {
-    margin: 10px;
+    background: linear-gradient(90deg, #2d2d2d 0%, #3a3a3a 100%);
+    color: #ffffff;
+    border: none;
     padding: 10px 20px;
     font-size: 16px;
-    background: linear-gradient(90deg, rgb(0 0 20) 0%, rgb(18 0 118) 100%);
-    color: white;
-    border: none;
+    border-radius: 25px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    position: relative;
-    z-index: 10;
-    font-family: Fantasy, sans-serif;
+    transition: background 0.3s;
+    display: block;
+    margin: 20px auto;
 }
 
 .button:hover {
-    background: linear-gradient(90deg, rgba(64, 64, 64, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    transform: scale(1.05);
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
 }
 
-.button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-.button:active:not(:disabled) {
-    background-color: #a9a9a9;
-}
-
-.tabs {
+/* Стили для вкладок */
+.tab-bar {
     display: flex;
     justify-content: space-around;
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    margin-bottom: 45px;
-    z-index: 10;
-    background: linear-gradient(90deg, rgb(0 2 12) 0%, rgb(0 3 42) 100%);
+    background-color: #1a1a1a;
+    border-top: 1px solid #444444;
 }
 
 .tab {
-    flex-grow: 1;
-    padding: 15px 20px;
-    font-size: 18px;
+    flex: 1;
+    padding: 15px;
     text-align: center;
+    background: linear-gradient(90deg, #1a1a1a 0%, #222222 100%);
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border-right: 1px solid #add8e6;
-}
-
-.tab:last-child {
-    border-right: none;
+    transition: background 0.3s;
 }
 
 .tab:hover {
-    background-color: #add8e6;
-    transform: scale(1.05);
+    background-color: #333333;
 }
 
-.content {
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    margin-top: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 10;
+.tab.active {
+    background-color: #4a4a4a;
 }
 
+/* Стили для контентных панелей */
 .content-pane {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: linear-gradient(135deg, #000000, #333333);
     padding: 20px;
+    min-height: calc(100vh - 60px); /* 60px - высота таббара */
     box-sizing: border-box;
-    position: relative;
-    z-index: 10;
-    background: linear-gradient(135deg, #4B0082, #800080);
-    background-image: url('images/photo_6011359021052834986_y.png');
-    background-size: cover;
-    background-position: center;
-    transition: filter 0.3s ease;
-}
-
-#controls {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 20px;
-}
-
-#blurBackground {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    pointer-events: none;
-    background: inherit;
+    display: none;
 }
