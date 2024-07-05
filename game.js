@@ -7,7 +7,7 @@ function handleAdEnded() {
 
 // Функция для обновления основного счета
 function updateMainScore() {
-    // Логика для обновления счета на интерфейсе
+    document.getElementById('tokenCount').textContent = mainScore;
     console.log("Main score updated: " + mainScore);
 }
 
