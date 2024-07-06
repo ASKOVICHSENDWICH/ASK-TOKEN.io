@@ -1,53 +1,111 @@
-// Функция для обработки завершения просмотра рекламы и начисления токенов
-function handleAdEnded() {
-    mainScore += 10; // Например, 10 токенов за просмотр
-    updateMainScore();
-    document.getElementById('adVideo').style.display = 'none';
-}
+document.addEventListener('DOMContentLoaded', function() {
+    let mainScore = 0; // Инициализация основного счета здесь
 
-// Функция для обновления основного счета
-function updateMainScore() {
-    document.getElementById('tokenCount').textContent = mainScore;
-    console.log("Main score updated: " + mainScore);
-}
+    // Функция для обработки завершения просмотра рекламы и начисления токенов
+    function handleAdEnded() {
+        mainScore += 10; // Например, 10 токенов за просмотр
+        updateMainScore();
+        document.getElementById('adVideo').style.display = 'none';
+    }
 
-// Инициализация основного счета
-let mainScore = 0;
+    // Функция для обновления основного счета
+    function updateMainScore() {
+        document.getElementById('tokenCount').textContent = mainScore;
+        console.log("Main score updated: " + mainScore);
+    }
 
-// Добавление обработчика события для кнопки "Смотреть рекламу"
-document.getElementById('watchAdButton').addEventListener('click', function() {
-    const adVideo = document.getElementById('adVideo');
-    adVideo.style.display = 'block';
-    adVideo.play();
+    // Обработчик для кнопки "Смотреть рекламу"
+    document.getElementById('watchAdButton').addEventListener('click', function() {
+        const adVideo = document.getElementById('adVideo');
+        adVideo.style.display = 'block';
+        adVideo.play();
 
-    adVideo.addEventListener('ended', handleAdEnded);
-});
-
-// Обработчики вкладок
-document.getElementById('earnTab').addEventListener('click', function() {
-    setActiveTab('earnTab', 'adsContent');
-});
-
-document.getElementById('tasksTab').addEventListener('click', function() {
-    setActiveTab('tasksTab', 'tasksContent');
-});
-
-document.getElementById('walletTab').addEventListener('click', function() {
-    setActiveTab('walletTab', 'walletContent');
-});
-
-// Функция для установки активной вкладки
-function setActiveTab(activeTabId, contentId) {
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
+        adVideo.addEventListener('ended', handleAdEnded);
     });
-    document.getElementById(activeTabId).classList.add('active');
 
-    document.querySelectorAll('.content-pane').forEach(content => {
-        content.style.display = 'none';
+    // Обработчики для вкладок (пример)
+    document.getElementById('earnTab').addEventListener('click', function() {
+        setActiveTab('earnTab', 'adsContent');
     });
-    document.getElementById(contentId).style.display = 'block';
-}
 
-// Установка начальной вкладки как активной
-setActiveTab('earnTab', 'adsContent');
+    document.getElementById('tasksTab').addEventListener('click', function() {
+        setActiveTab('tasksTab', 'tasksContent');
+    });
+
+    document.getElementById('walletTab').addEventListener('click', function() {
+        setActiveTab('walletTab', 'walletContent');
+    });
+
+    // Функция для установки активной вкладки (пример)
+    function setActiveTab(activeTabId, contentId) {
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.getElementById(activeTabId).classList.add('active');
+
+        document.querySelectorAll('.content-pane').forEach(content => {
+            content.style.display = 'none';
+        });
+        document.getElementById(contentId).style.display = 'block';
+    }
+
+    // Функция для удаления задачи с анимацией
+    function removeTaskWithAnimation(taskElement) {
+        taskElement.style.transition = 'opacity 0.5s ease-out';
+        taskElement.style.opacity = '0';
+        setTimeout(() => {
+            taskElement.remove();
+        }, 500);
+    }
+
+    // Функция для показа анимации получения токенов
+    function showTokenAnimation(taskElement) {
+        const tokenAnimation = document.createElement('div');
+        tokenAnimation.className = 'token-animation';
+        tokenAnimation.textContent = '+25';
+        taskElement.appendChild(tokenAnimation);
+
+        setTimeout(() => {
+            tokenAnimation.style.transition = 'opacity 0.5s ease-out';
+            tokenAnimation.style.opacity = '0';
+        }, 0);
+
+        setTimeout(() => {
+            tokenAnimation.remove();
+        }, 500);
+    }
+
+    // Обработчики для кнопок проверки задач
+    document.getElementById('checkTask1Button').addEventListener('click', function() {
+        const answer = parseInt(document.getElementById('task1Answer').value, 10);
+        const taskElement = document.getElementById('checkTask1Button').parentElement;
+        if (answer === 6) { // Правильный ответ для задачи 1
+            mainScore += 25; // Начисляем 25 токенов за правильный ответ
+            updateMainScore();
+            showTokenAnimation(taskElement);
+            removeTaskWithAnimation(taskElement);
+        }
+    });
+
+    document.getElementById('checkTask2Button').addEventListener('click', function() {
+        const answer = parseInt(document.getElementById('task2Answer').value, 10);
+        const taskElement = document.getElementById('checkTask2Button').parentElement;
+        if (answer === 10) { // Правильный ответ для задачи 2
+            mainScore += 25; // Начисляем 25 токенов за правильный ответ
+            updateMainScore();
+            showTokenAnimation(taskElement);
+            removeTaskWithAnimation(taskElement);
+        }
+    });
+
+    document.getElementById('checkTask3Button').addEventListener('click', function() {
+        const answer = parseInt(document.getElementById('task3Answer').value, 10);
+        const taskElement = document.getElementById('checkTask3Button').parentElement;
+        if (answer === 15) { // Правильный ответ для задачи 3
+            mainScore += 25; // Начисляем 25 токенов за правильный ответ
+            updateMainScore();
+            showTokenAnimation(taskElement);
+            removeTaskWithAnimation(taskElement);
+        }
+    });
+});
