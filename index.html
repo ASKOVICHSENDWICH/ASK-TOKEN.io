@@ -9,19 +9,43 @@
 <body>
     <!-- Контент вкладок -->
     <div id="adsContent" class="content-pane" style="display: block;">
-        <div class="counter">
-            <span id="tokenCount">0</span> ∞
+        <div class="counter-box">
+            <div class="counter">
+                <span id="tokenCount">0</span> ∞
+            </div>
         </div>
         <button id="watchAdButton" class="button">Смотреть рекламу</button>
         <video id="adVideo" width="320" height="240" controls style="display: none;">
-            <source src="path_to_ad_video.mp4" type="video/mp4">
+            <source src="https://youtu.be/qwFjEYbD35w?si=FO9MNlE7QtFBdDGU" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
     </div>
     <div id="tasksContent" class="content-pane" style="display: none;">
         <!-- Контент для ежедневных заданий -->
         <h2>Tasks</h2>
-        <p>Здесь будут отображаться ежедневные задания.</p>
+        <div id="dailyTasks">
+            <div class="task-widget">
+                <h2>Задача №1</h2>
+                <p>Решите следующее математическое уравнение:</p>
+                <p>2 + 2 * 2 = ?</p>
+                <input type="number" id="task1Answer" placeholder="Введите ответ">
+                <button id="checkTask1Button" class="button">Проверить</button>
+            </div>
+            <div class="task-widget">
+                <h2>Задача №2</h2>
+                <p>Решите следующее математическое уравнение:</p>
+                <p>5 * 2 = ?</p>
+                <input type="number" id="task2Answer" placeholder="Введите ответ">
+                <button id="checkTask2Button" class="button">Проверить</button>
+            </div>
+            <div class="task-widget">
+                <h2>Задача №3</h2>
+                <p>Решите следующее математическое уравнение:</p>
+                <p>3 * 5 = ?</p>
+                <input type="number" id="task3Answer" placeholder="Введите ответ">
+                <button id="checkTask3Button" class="button">Проверить</button>
+            </div>
+        </div>
     </div>
     <div id="walletContent" class="content-pane" style="display: none;">
         <!-- Контент для подключения кошелька -->
