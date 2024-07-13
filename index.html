@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Рекламная Игра</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8770840341687037" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Контент вкладок -->
@@ -14,12 +15,15 @@
                 <span id="tokenCount">0</span> ∞
             </div>
         </div>
-        <button id="watchAdButton" class="button" disabled>Смотреть рекламу</button>
-        <video id="adVideo" width="320" height="240" controls style="display: none;">
-            <source src="videos/add.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
-        <p>Осталось просмотров рекламы: <span id="adsRemaining">10</span></p>
+        <button id="watchAdButton" class="button">Смотреть рекламу</button>
+        <div id="adContainer" style="display: none;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8770840341687037"
+                 data-ad-slot="XXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
     </div>
     <div id="tasksContent" class="content-pane" style="display: none;">
         <!-- Контент для ежедневных заданий -->
@@ -53,16 +57,12 @@
         <h2>Wallet</h2>
         <p>Здесь будет информация о подключении кошелька.</p>
     </div>
-    <div id="gameContent" class="content-pane" style="display: none;">
-        <canvas id="gameCanvas" width="320" height="480"></canvas>
-    </div>
 
     <!-- Вкладки -->
     <div class="tab-bar">
         <button class="tab" id="earnTab">Earn</button>
         <button class="tab" id="tasksTab">Tasks</button>
         <button class="tab" id="walletTab">Wallet</button>
-        <button class="tab" id="gameTab">Game</button>
     </div>
 
     <script src="game.js"></script>
