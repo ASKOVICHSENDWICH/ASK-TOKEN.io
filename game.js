@@ -17,10 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Обработчик для кнопки "Смотреть рекламу"
+    // Обработчик для кнопки "Смотреть рекламу"
     document.getElementById('watchAdButton').addEventListener('click', function() {
         if (adViewsToday < maxAdViewsPerDay) {
             const adContainer = document.getElementById('adContainer');
-            if (!adContainer.querySelector('ins.adsbygoogle')) { // Проверяем, есть ли уже реклама в контейнере
+            // Проверяем, есть ли уже реклама в контейнере
+            if (!adContainer.hasChildNodes()) {
                 adContainer.style.display = 'block';
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 adViewsToday += 1;
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Сегодня вы уже посмотрели максимальное количество реклам.');
         }
     });
+
 
 
     // Обработчики для вкладок (пример)
