@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const adContainer = document.getElementById('adContainer');
             adContainer.style.display = 'block';
             (adsbygoogle = window.adsbygoogle || []).push({});
-
             adViewsToday += 1;
             console.log("Ads viewed today: " + adViewsToday);
         } else {
