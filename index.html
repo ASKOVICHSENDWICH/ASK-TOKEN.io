@@ -14,11 +14,12 @@
                 <span id="tokenCount">0</span> ∞
             </div>
         </div>
-        <button id="watchAdButton" class="button">Смотреть рекламу</button>
+        <button id="watchAdButton" class="button" disabled>Смотреть рекламу</button>
         <video id="adVideo" width="320" height="240" controls style="display: none;">
             <source src="videos/add.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
+        <p>Осталось просмотров рекламы: <span id="adsRemaining">10</span></p>
     </div>
     <div id="tasksContent" class="content-pane" style="display: none;">
         <!-- Контент для ежедневных заданий -->
@@ -52,12 +53,16 @@
         <h2>Wallet</h2>
         <p>Здесь будет информация о подключении кошелька.</p>
     </div>
+    <div id="gameContent" class="content-pane" style="display: none;">
+        <canvas id="gameCanvas" width="320" height="480"></canvas>
+    </div>
 
     <!-- Вкладки -->
     <div class="tab-bar">
         <button class="tab" id="earnTab">Earn</button>
         <button class="tab" id="tasksTab">Tasks</button>
         <button class="tab" id="walletTab">Wallet</button>
+        <button class="tab" id="gameTab">Game</button>
     </div>
 
     <script src="game.js"></script>
