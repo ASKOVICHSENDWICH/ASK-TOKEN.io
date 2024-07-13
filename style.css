@@ -131,3 +131,12 @@ body, html {
         opacity: 0;
     }
 }
+
+/* Canvas стили */
+#gameCanvas {
+    display: block;
+    margin: 20px auto;
+    background-color: #1a1a1a;
+    border: 1px solid #4a4a4a;
+    border-radius: 15px;
+}
