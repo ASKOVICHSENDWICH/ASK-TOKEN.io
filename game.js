@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('tokenCount').textContent = mainScore;
         console.log("Main score updated: " + mainScore);
     }
-
-    // Обработчик для кнопки "Смотреть рекламу"
+    
     // Обработчик для кнопки "Смотреть рекламу"
     document.getElementById('watchAdButton').addEventListener('click', function() {
         if (adViewsToday < maxAdViewsPerDay) {
@@ -34,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Сегодня вы уже посмотрели максимальное количество реклам.');
         }
     });
+
 
 
 
