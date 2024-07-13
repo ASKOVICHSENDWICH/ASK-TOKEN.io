@@ -20,14 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('watchAdButton').addEventListener('click', function() {
         if (adViewsToday < maxAdViewsPerDay) {
             const adContainer = document.getElementById('adContainer');
-            adContainer.style.display = 'block';
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            adViewsToday += 1;
-            console.log("Ads viewed today: " + adViewsToday);
+            if (!adContainer.querySelector('ins.adsbygoogle')) { // Проверяем, есть ли уже реклама в контейнере
+                adContainer.style.display = 'block';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                adViewsToday += 1;
+                console.log("Ads viewed today: " + adViewsToday);
+            } else {
+                console.log("Already has ads in the container.");
+            }
         } else {
             alert('Сегодня вы уже посмотрели максимальное количество реклам.');
         }
     });
+
 
     // Обработчики для вкладок (пример)
     document.getElementById('earnTab').addEventListener('click', function() {
