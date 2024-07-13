@@ -114,4 +114,21 @@ document.addEventListener('DOMContentLoaded', function() {
             removeTaskWithAnimation(taskElement);
         }
     });
+
+    // Обработчик для кнопки подписки
+    document.getElementById('subscribeButton').addEventListener('click', function() {
+        window.open("https://t.me/frogask", "_blank"); // Замените URL на URL вашего Telegram канала
+    });
+
+    // Обработчик для кнопки проверки подписки
+    document.getElementById('checkSubscriptionButton').addEventListener('click', function() {
+        const taskElement = document.getElementById('checkSubscriptionButton').parentElement;
+        mainScore += 25; // Начисляем 25 токенов за подписку
+        updateMainScore();
+        showTokenAnimation(taskElement);
+        removeTaskWithAnimation(taskElement);
+    });
+
+    // Инициализация
+    updateMainScore();
 });
