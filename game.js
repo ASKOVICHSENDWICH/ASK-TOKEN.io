@@ -1,17 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let mainScore = 0;
-    let adViewsRemaining = 10;
-    const maxDailyAds = 10;
-    let gameScore = 0;
+    let mainScore = 0; // Инициализация основного счета здесь
+    let adViewsToday = 0; // Количество просмотренных реклам за сегодня
+    const maxAdViewsPerDay = 10; // Максимальное количество реклам за день
 
     // Функция для обработки завершения просмотра рекламы и начисления токенов
     function handleAdEnded() {
-        mainScore += 10;
+        mainScore += 10; // Например, 10 токенов за просмотр
         updateMainScore();
-        adViewsRemaining--;
-        updateAdViewsRemaining();
-        document.getElementById('adVideo').style.display = 'none';
-        document.getElementById('watchAdButton').disabled = adViewsRemaining <= 0;
+        document.getElementById('adContainer').style.display = 'none';
     }
 
     // Функция для обновления основного счета
@@ -20,22 +16,21 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Main score updated: " + mainScore);
     }
 
-    // Функция для обновления оставшихся просмотров рекламы
-    function updateAdViewsRemaining() {
-        document.getElementById('adsRemaining').textContent = adViewsRemaining;
-        console.log("Ad views remaining: " + adViewsRemaining);
-    }
-
     // Обработчик для кнопки "Смотреть рекламу"
     document.getElementById('watchAdButton').addEventListener('click', function() {
-        const adVideo = document.getElementById('adVideo');
-        adVideo.style.display = 'block';
-        adVideo.play();
+        if (adViewsToday < maxAdViewsPerDay) {
+            const adContainer = document.getElementById('adContainer');
+            adContainer.style.display = 'block';
+            (adsbygoogle = window.adsbygoogle || []).push({});
 
-        adVideo.addEventListener('ended', handleAdEnded);
+            adViewsToday += 1;
+            console.log("Ads viewed today: " + adViewsToday);
+        } else {
+            alert('Сегодня вы уже посмотрели максимальное количество реклам.');
+        }
     });
 
-    // Обработчики для вкладок
+    // Обработчики для вкладок (пример)
     document.getElementById('earnTab').addEventListener('click', function() {
         setActiveTab('earnTab', 'adsContent');
     });
@@ -48,12 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setActiveTab('walletTab', 'walletContent');
     });
 
-    document.getElementById('gameTab').addEventListener('click', function() {
-        setActiveTab('gameTab', 'gameContent');
-        startGame();
-    });
-
-    // Функция для установки активной вкладки
+    // Функция для установки активной вкладки (пример)
     function setActiveTab(activeTabId, contentId) {
         document.querySelectorAll('.tab').forEach(tab => {
             tab.classList.remove('active');
@@ -125,82 +115,4 @@ document.addEventListener('DOMContentLoaded', function() {
             removeTaskWithAnimation(taskElement);
         }
     });
-
-    // Мини-игра "Knife Hit"
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    let appleX, appleY, knifeY;
-    const appleRadius = 15;
-    const knifeWidth = 5;
-    const knifeHeight = 20;
-    let knifeThrown = false;
-
-    function startGame() {
-        gameScore = 0;
-        knifeY = canvas.height - knifeHeight;
-        placeApple();
-        gameLoop();
-    }
-
-    function placeApple() {
-        appleX = Math.random() * (canvas.width - 2 * appleRadius) + appleRadius;
-        appleY = Math.random() * (canvas.height / 2 - 2 * appleRadius) + appleRadius;
-    }
-
-    function drawApple() {
-        ctx.beginPath();
-        ctx.arc(appleX, appleY, appleRadius, 0, Math.PI * 2);
-        ctx.fillStyle = '#FF0000';
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    function drawKnife() {
-        ctx.beginPath();
-        ctx.rect(canvas.width / 2 - knifeWidth / 2, knifeY, knifeWidth, knifeHeight);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    function gameLoop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawApple();
-        drawKnife();
-
-        if (knifeThrown) {
-            knifeY -= 5;
-            if (knifeY < appleY + appleRadius && knifeY > appleY - appleRadius &&
-                canvas.width / 2 > appleX - appleRadius && canvas.width / 2 < appleX + appleRadius) {
-                gameScore++;
-                adViewsRemaining++;
-                updateAdViewsRemaining();
-                document.getElementById('watchAdButton').disabled = adViewsRemaining <= 0;
-                knifeThrown = false;
-                knifeY = canvas.height - knifeHeight;
-                placeApple();
-            } else if (knifeY < 0) {
-                knifeThrown = false;
-                knifeY = canvas.height - knifeHeight;
-            }
-        }
-
-        requestAnimationFrame(gameLoop);
-    }
-
-    canvas.addEventListener('click', function() {
-        if (!knifeThrown) {
-            knifeThrown = true;
-        }
-    });
-
-    // Обновляем оставшиеся просмотры рекламы каждый день
-    setInterval(function() {
-        adViewsRemaining = maxDailyAds;
-        updateAdViewsRemaining();
-        document.getElementById('watchAdButton').disabled = adViewsRemaining <= 0;
-    }, 86400000); // 24 часа в миллисекундах
-
-    updateMainScore();
-    updateAdViewsRemaining();
 });
